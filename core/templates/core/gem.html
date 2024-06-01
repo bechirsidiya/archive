@@ -1,0 +1,13 @@
+{% extends 'core/base.html'%}
+{% block content %}
+<section>
+    <div>
+        <h1>Matiers List</h1>
+        <ul>
+            {% for matier in matiers %}
+            <a href="{% url 'matier_detailgem' matier_id=matier.id %}">{{ matier.name }}</a>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

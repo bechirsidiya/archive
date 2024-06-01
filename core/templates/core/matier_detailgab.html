@@ -1,0 +1,18 @@
+{% extends 'core/base.html'%}
+{% block content %}
+<section>
+    <h1>{{ matier.name }} PDFs</h1>
+    <ul>
+        {% for pdf in pdfs %}
+            <li class="pdf-container">
+                <h2>{{ pdf.title }}</h2>
+                <a href="{{ pdf.pdf_file.url }}"  style="font-style:none  ;" download> telecharger </a> | 
+                <div id="pdf-viewer-{{ forloop.counter }}" class="pdf-viewer">
+                    <embed src="{{ pdf.pdf_file.url }}" type="application/pdf">
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</section>
+{% endblock %}

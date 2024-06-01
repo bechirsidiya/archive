@@ -1,0 +1,45 @@
+<!-- core/matier_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ matier.name }} PDFs</title>
+    <style>
+        .pdf-container {
+            margin-bottom: 20px;
+        }
+        .pdf-viewer {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+            display: none; /* Hide by default */
+        }
+    </style>
+    <script>
+        function togglePDFViewer(id) {
+            const viewer = document.getElementById(id);
+            if (viewer.style.display === "none") {
+                viewer.style.display = "block";
+            } else {
+                viewer.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>{{ matier.name }} PDFs</h1>
+    <ul>
+        {% for pdf in pdfs %}
+            <li class="pdf-container">
+                <h2>{{ pdf.title }}</h2>
+                <a href="{{ pdf.pdf_file.url }}" download>Download</a> | 
+                <a href="javascript:void(0);" onclick="togglePDFViewer('pdf-viewer-{{ forloop.counter }}')">Read it online</a>
+                <div id="pdf-viewer-{{ forloop.counter }}" class="pdf-viewer">
+                    <embed src="{{ pdf.pdf_file.url }}" type="application/pdf">
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
